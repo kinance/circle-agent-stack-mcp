@@ -54,5 +54,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kinance/circle-agent-stack-mcp.git"
-  }
+  },
+  "mcpName": "io.github.kinance/circle-agent-stack-mcp"
 }
