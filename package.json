@@ -1,6 +1,6 @@
 {
   "name": "circle-agent-stack-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "MCP server for Circle Agent Stack — wallet management, USDC transfers, and x402 nanopayments via tool calls",
   "keywords": [
     "mcp",

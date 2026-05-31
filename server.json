@@ -1,17 +1,17 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.kinance/circle-agent-stack-mcp",
-  "description": "MCP server for Circle Agent Stack — wallet management, USDC transfers, and x402 nanopayments via tool calls",
+  "description": "Circle Agent Stack for AI agents: USDC wallets, spend policies, transfers, and x402 nanopayments.",
   "repository": {
     "url": "https://github.com/kinance/circle-agent-stack-mcp",
     "source": "github"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "circle-agent-stack-mcp",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "transport": {
         "type": "stdio"
       },
