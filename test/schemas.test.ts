@@ -126,6 +126,27 @@ describe("TransferSchema", () => {
       })
     ).toThrow();
   });
+
+  it("rejects memo starting with dash (flag injection)", () => {
+    expect(() =>
+      TransferSchema.parse({
+        wallet_id: "w",
+        to_address: validAddress,
+        amount_usdc: 1,
+        memo: "--malicious-flag",
+      })
+    ).toThrow();
+  });
+
+  it("accepts memo with internal dashes", () => {
+    const result = TransferSchema.parse({
+      wallet_id: "w",
+      to_address: validAddress,
+      amount_usdc: 1,
+      memo: "May-June payment",
+    });
+    expect(result.memo).toBe("May-June payment");
+  });
 });
 
 describe("X402PaySchema", () => {

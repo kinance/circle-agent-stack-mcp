@@ -16,6 +16,10 @@ if (!PAYOUT_ADDRESS) {
   console.error("CIRCLE_PAYOUT_ADDRESS environment variable is required");
   process.exit(1);
 }
+if (!process.env.CIRCLE_API_KEY) {
+  console.error("CIRCLE_API_KEY environment variable is required");
+  process.exit(1);
+}
 
 const BASE_MAINNET = "eip155:8453" as const;
 

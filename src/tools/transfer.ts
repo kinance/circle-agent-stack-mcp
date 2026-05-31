@@ -5,7 +5,7 @@ export const TransferSchema = z.object({
   wallet_id: z.string().describe("Source wallet ID"),
   to_address: z.string().regex(/^0x[a-fA-F0-9]{40}$/, "Must be a valid Ethereum address (0x + 40 hex chars)").describe("Recipient on-chain address (0x...)"),
   amount_usdc: z.number().positive().describe("Amount in USDC (e.g. 5.00 = five dollars)"),
-  memo: z.string().max(128).optional().describe("Optional transfer memo"),
+  memo: z.string().max(128).regex(/^[a-zA-Z0-9][a-zA-Z0-9 .,!?\-_:;()#@]*$/, "Memo must start with alphanumeric and contain only basic punctuation").optional().describe("Optional transfer memo"),
 });
 
 export const transferTools = [
