@@ -15,18 +15,12 @@ export async function circleCLI(args: string[]): Promise<unknown> {
     throw new Error("CIRCLE_API_KEY environment variable is required");
   }
 
-  const { stdout, stderr } = await execFileAsync("circle", args, {
+  // execFileAsync rejects on non-zero exit code, which is the reliable error signal.
+  // stderr may contain benign warnings from the Circle CLI — we surface it only on failure.
+  const { stdout } = await execFileAsync("circle", args, {
     env,
     timeout: 30_000,
   });
-
-  if (stderr) {
-    // Circle CLI writes non-fatal warnings to stderr; only throw on actual errors
-    const lower = stderr.toLowerCase();
-    if (lower.includes("error") || lower.includes("failed")) {
-      throw new Error(`circle CLI error: ${stderr.trim()}`);
-    }
-  }
 
   try {
     return JSON.parse(stdout);

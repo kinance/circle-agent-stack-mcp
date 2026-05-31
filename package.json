@@ -14,6 +14,12 @@
   "license": "MIT",
   "type": "module",
   "main": "dist/server.js",
+  "files": [
+    "dist",
+    "examples",
+    "README.md",
+    "LICENSE"
+  ],
   "bin": {
     "circle-agent-stack-mcp": "dist/server.js",
     "circle-agent-stack-mcp-http": "dist/http-server.js"
@@ -24,6 +30,7 @@
     "dev:http": "tsx watch src/http-server.ts",
     "start": "node dist/server.js",
     "start:http": "node dist/http-server.js",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build"
   },
@@ -38,7 +45,8 @@
     "@types/express": "^5.0.0",
     "@types/node": "^22.0.0",
     "tsx": "^4.19.0",
-    "typescript": "^5.8.0"
+    "typescript": "^5.8.0",
+    "vitest": "^4.1.7"
   },
   "engines": {
     "node": ">=20"

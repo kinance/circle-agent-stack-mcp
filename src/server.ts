@@ -2,10 +2,13 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
+import { readFileSync } from "node:fs";
 import { walletTools } from "./tools/wallet.js";
 import { policyTools } from "./tools/policy.js";
 import { transferTools } from "./tools/transfer.js";
 import { x402Tools } from "./tools/x402.js";
+
+const pkg = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf-8"));
 
 if (!process.env.CIRCLE_API_KEY) {
   console.error("CIRCLE_API_KEY environment variable is required");
@@ -13,8 +16,8 @@ if (!process.env.CIRCLE_API_KEY) {
 }
 
 const server = new McpServer({
-  name: "circle-agent-stack-mcp",
-  version: "0.1.0",
+  name: pkg.name,
+  version: pkg.version,
 });
 
 type AnyTool = {

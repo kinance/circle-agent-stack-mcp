@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import express, { Request, Response } from "express";
+import { z } from "zod";
 import { paymentMiddleware, x402ResourceServer } from "@x402/express";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
 import { HTTPFacilitatorClient } from "@x402/core/server";
@@ -60,6 +61,7 @@ app.use(paymentMiddleware(routes, resourceServer));
 
 type AnyTool = {
   name: string;
+  schema: z.ZodObject<z.ZodRawShape>;
   handler: (input: unknown) => Promise<unknown>;
 };
 
@@ -71,9 +73,14 @@ function registerTool(toolList: AnyTool[], toolName: string, path: string): void
   }
   app.post(path, async (req: Request, res: Response) => {
     try {
-      const result = await tool.handler(req.body);
+      const parsed = tool.schema.parse(req.body);
+      const result = await tool.handler(parsed);
       res.json(result);
     } catch (err) {
+      if (err instanceof z.ZodError) {
+        res.status(400).json({ error: "Validation failed", details: err.errors });
+        return;
+      }
       const message = err instanceof Error ? err.message : String(err);
       res.status(500).json({ error: message });
     }
@@ -86,6 +93,7 @@ registerTool(x402Tools as AnyTool[], "circle_x402_pay", "/tools/circle_x402_pay"
 
 // Bazaar discovery manifest
 app.get("/services.json", (_req: Request, res: Response) => {
+  const host = _req.get("host") ?? `localhost:${PORT}`;
   res.json({
     id: "circle-agent-stack-mcp",
     name: "Circle Agent Stack MCP",
@@ -101,7 +109,7 @@ app.get("/services.json", (_req: Request, res: Response) => {
       { path: "/tools/circle_x402_pay", method: "POST", price: "$0.02" },
     ],
     docs: "https://github.com/kinance/circle-agent-stack-mcp",
-    llms: `http://localhost:${PORT}/llms.txt`,
+    llms: `http://${host}/llms.txt`,
   });
 });
 

@@ -3,7 +3,7 @@ import { circleCLI } from "../circle/cli.js";
 
 export const TransferSchema = z.object({
   wallet_id: z.string().describe("Source wallet ID"),
-  to_address: z.string().describe("Recipient on-chain address (0x...)"),
+  to_address: z.string().regex(/^0x[a-fA-F0-9]{40}$/, "Must be a valid Ethereum address (0x + 40 hex chars)").describe("Recipient on-chain address (0x...)"),
   amount_usdc: z.number().positive().describe("Amount in USDC (e.g. 5.00 = five dollars)"),
   memo: z.string().max(128).optional().describe("Optional transfer memo"),
 });
