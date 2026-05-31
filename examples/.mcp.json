@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "circle": {
+      "command": "npx",
+      "args": ["-y", "circle-agent-stack-mcp"],
+      "env": {
+        "CIRCLE_API_KEY": "YOUR_CIRCLE_API_KEY"
+      }
+    }
+  }
+}
