@@ -1,12 +1,4 @@
 {
-  "$schema": "https://glama.ai/mcp/schemas/glama.json",
-  "name": "circle-agent-stack-mcp",
-  "description": "MCP server for Circle Agent Stack — wallet management, USDC transfers, and x402 nanopayments via tool calls",
-  "maintainers": [
-    {
-      "name": "kinance",
-      "url": "https://github.com/kinance"
-    }
-  ],
-  "repository": "https://github.com/kinance/circle-agent-stack-mcp"
+  "$schema": "https://glama.ai/mcp/schemas/server.json",
+  "maintainers": ["kinance"]
 }
