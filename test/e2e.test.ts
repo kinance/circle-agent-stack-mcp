@@ -109,7 +109,7 @@ describe("E2E: MCP server lifecycle", () => {
     const msg: any = await client.initialize();
     expect(msg.result.protocolVersion).toBe("2024-11-05");
     expect(msg.result.serverInfo.name).toBe("circle-agent-stack-mcp");
-    expect(msg.result.serverInfo.version).toBe("0.1.1");
+    expect(msg.result.serverInfo.version).toBe("0.1.3");
     expect(msg.result.capabilities.tools).toBeDefined();
   });
 
