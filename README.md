@@ -1,6 +1,6 @@
 # circle-agent-stack-mcp
 
-MCP server for [Circle's Agent Stack](https://developers.circle.com/w3s/agent-stack). Create wallets, set spend policies, send USDC, and pay x402-priced endpoints — all from a tool call.
+MCP server for [Circle's Agent Stack](https://developers.circle.com/agent-stack). Create wallets, set spend policies, send USDC, and pay x402-priced endpoints — all from a tool call.
 
 ```bash
 npx circle-agent-stack-mcp
